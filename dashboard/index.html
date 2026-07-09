@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pentesting AI Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="header">
+        <h1>Pentesting AI</h1>
+        <p class="subtitle">AI‑driven automated reconnaissance</p>
+    </header>
+    <main class="container">
+        <section class="workflow-section">
+            <h2>Upload Workflow</h2>
+            <input type="file" id="workflowFile" accept=".yaml,.yml" />
+            <button id="runBtn">Run Workflow</button>
+        </section>
+        <section class="output-section">
+            <h2>Live Output</h2>
+            <pre id="output" class="output-box"></pre>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
