@@ -3,25 +3,182 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pentesting AI Dashboard</title>
+    <title>Aegis - Automated Security Audit Dashboard</title>
+    <!-- Google Fonts Inter & Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header class="header">
-        <h1>Pentesting AI</h1>
-        <p class="subtitle">AI‑driven automated reconnaissance</p>
-    </header>
-    <main class="container">
-        <section class="workflow-section">
-            <h2>Upload Workflow</h2>
-            <input type="file" id="workflowFile" accept=".yaml,.yml" />
-            <button id="runBtn">Run Workflow</button>
-        </section>
-        <section class="output-section">
-            <h2>Live Output</h2>
-            <pre id="output" class="output-box"></pre>
-        </section>
-    </main>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo">🛡️</div>
+                <div class="brand-text">
+                    <h2>AEGIS</h2>
+                    <span>Security Audit Agent</span>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" id="navScan">
+                    <span class="nav-icon">⚡</span> Scan Target
+                </a>
+                <a href="#" class="nav-item" id="navHistory">
+                    <span class="nav-icon">📊</span> Reports
+                </a>
+                <a href="#" class="nav-item" id="navSettings">
+                    <span class="nav-icon">⚙️</span> Configuration
+                </a>
+            </nav>
+            <div class="system-status">
+                <div class="status-indicator online"></div>
+                <span>Engine Status: Online</span>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-info">
+                    <h1>Security Audit Dashboard</h1>
+                    <p>Perform automated audits, discover open ports, and analyze configuration vulnerabilities.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="badge-role">Operator</div>
+                    <span class="username">jd2192553-droid</span>
+                </div>
+            </header>
+
+            <!-- Grid Layout for Forms & Displays -->
+            <div class="dashboard-grid">
+                <!-- Controls Column (Left) -->
+                <div class="grid-col-left">
+                    <!-- Config Card -->
+                    <section class="card config-card">
+                        <h3>1. Audit Configuration</h3>
+                        <div class="form-group">
+                            <label for="targetInput">Target IP / Hostname</label>
+                            <input type="text" id="targetInput" placeholder="e.g., scanme.nmap.org or 192.168.1.1" value="localhost" />
+                        </div>
+                        
+                        <div class="form-group or-divider">
+                            <span>OR UPLOAD CONFIG</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="workflowFile">Workflow YAML File</label>
+                            <div class="file-drop-area">
+                                <span class="file-btn">Choose File</span>
+                                <input type="file" id="workflowFile" accept=".yaml,.yml" />
+                                <span class="file-name" id="fileNameText">No file chosen</span>
+                            </div>
+                        </div>
+
+                        <button id="runBtn" class="btn btn-primary">
+                            <span class="btn-icon">▶</span> Start Security Audit
+                        </button>
+                    </section>
+
+                    <!-- Summary & Metrics Card (Populated post-scan) -->
+                    <section class="card metrics-card hidden" id="metricsCard">
+                        <h3>2. Audit Summary</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item critical">
+                                <span class="metric-value" id="valCritical">0</span>
+                                <span class="metric-label">Critical</span>
+                            </div>
+                            <div class="metric-item high">
+                                <span class="metric-value" id="valHigh">0</span>
+                                <span class="metric-label">High</span>
+                            </div>
+                            <div class="metric-item medium">
+                                <span class="metric-value" id="valMedium">0</span>
+                                <span class="metric-label">Medium</span>
+                            </div>
+                            <div class="metric-item low">
+                                <span class="metric-value" id="valLow">0</span>
+                                <span class="metric-label">Low</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Simple SVG Donut Chart for visualization -->
+                        <div class="chart-container">
+                            <svg width="100%" height="150" viewBox="0 0 200 200" class="donut-chart">
+                                <circle class="donut-ring" cx="100" cy="100" r="80" fill="transparent" stroke="#1f2937" stroke-width="20"></circle>
+                                <circle class="donut-segment segment-high" id="chartHigh" cx="100" cy="100" r="80" fill="transparent" stroke="#ef4444" stroke-width="20" stroke-dasharray="0 502.4" stroke-dashoffset="0"></circle>
+                                <circle class="donut-segment segment-medium" id="chartMedium" cx="100" cy="100" r="80" fill="transparent" stroke="#f59e0b" stroke-width="20" stroke-dasharray="0 502.4" stroke-dashoffset="0"></circle>
+                                <circle class="donut-segment segment-low" id="chartLow" cx="100" cy="100" r="80" fill="transparent" stroke="#3b82f6" stroke-width="20" stroke-dasharray="0 502.4" stroke-dashoffset="0"></circle>
+                                <g class="chart-text">
+                                    <text x="50%" y="47%" class="chart-number" id="chartTotal">0</text>
+                                    <text x="50%" y="62%" class="chart-label">Issues</text>
+                                </g>
+                            </svg>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Outputs Column (Right) -->
+                <div class="grid-col-right">
+                    <section class="card results-card">
+                        <!-- Tab Bar -->
+                        <div class="tab-bar">
+                            <button class="tab-btn active" data-tab="consoleTab">Live Console</button>
+                            <button class="tab-btn" data-tab="portsTab">Services & Ports</button>
+                            <button class="tab-btn" data-tab="findingsTab">Findings & Remediation</button>
+                        </div>
+
+                        <!-- Tab Content Views -->
+                        <div class="tab-content-wrapper">
+                            <!-- Console Tab -->
+                            <div class="tab-content active" id="consoleTab">
+                                <div class="console-wrapper">
+                                    <div class="console-header">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                        <span class="console-title">audit_output_stream.log</span>
+                                    </div>
+                                    <pre id="output" class="output-box">Awaiting audit trigger...</pre>
+                                </div>
+                            </div>
+
+                            <!-- Ports Tab -->
+                            <div class="tab-content" id="portsTab">
+                                <div class="table-container">
+                                    <table class="data-table" id="portsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Port</th>
+                                                <th>Protocol</th>
+                                                <th>Service</th>
+                                                <th>Banner / Version</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5" class="table-empty">No scan data available. Start an audit.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Findings Tab -->
+                            <div class="tab-content" id="findingsTab">
+                                <div class="findings-list" id="findingsList">
+                                    <div class="table-empty">No scan data available. Start an audit.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>

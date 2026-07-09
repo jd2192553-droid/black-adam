@@ -1,0 +1,10 @@
+# Aegis Automated Security Audit Workflow
+# Upload this file to the Aegis Dashboard to perform an automated scan.
+
+target: scanme.nmap.org
+intensity: medium
+modules:
+  - port_scan
+  - web_header_analysis
+  - ssl_expiry_check
+  - basic_recon
