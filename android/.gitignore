@@ -1,0 +1,30 @@
+# Gradle files
+.gradle/
+build/
+*.apk
+*.aar
+*.jks
+*.keystore
+
+# Android Studio
+.idea/
+.DS_Store
+*.iml
+*.iws
+*.ipr
+
+# Local configuration file
+local.properties
+
+# Lint
+lint-results*.xml
+lint-results*.html
+
+# Generated files
+bin/
+gen/
+out/
+
+# Gradle wrapper
+gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
