@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme -->
+    <color name="dark_bg">#070A13</color>
+    <color name="dark_surface">#0D1426</color>
+    <color name="dark_border">#6366F1</color>
+
+    <!-- Light theme -->
+    <color name="light_bg">#F8F9FA</color>
+    <color name="light_surface">#FFFFFF</color>
+    <color name="light_border">#6366F1</color>
+
+    <!-- Primary colors -->
+    <color name="primary">#6366F1</color>
+    <color name="primary_hover">#4F46E5</color>
+    <color name="accent_green">#10B981</color>
+
+    <!-- Severity colors -->
+    <color name="severity_critical">#7F1D1D</color>
+    <color name="severity_high">#EF4444</color>
+    <color name="severity_medium">#F59E0B</color>
+    <color name="severity_low">#3B82F6</color>
+
+    <!-- Text colors -->
+    <color name="text_main">#F3F4F6</color>
+    <color name="text_muted">#9CA3AF</color>
+</resources>

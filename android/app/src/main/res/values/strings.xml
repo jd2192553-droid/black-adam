@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aegis</string>
+    <string name="scan_target">Scan Target</string>
+    <string name="reports">Reports</string>
+    <string name="configuration">Configuration</string>
+    <string name="audit_configuration">1. Audit Configuration</string>
+    <string name="target_input_label">Target IP / Hostname</string>
+    <string name="target_input_placeholder">e.g., scanme.nmap.org or 192.168.1.1</string>
+    <string name="start_audit">Start Security Audit</string>
+    <string name="auditing_target">Auditing Target...</string>
+    <string name="audit_summary">2. Audit Summary</string>
+    <string name="critical">Critical</string>
+    <string name="high">High</string>
+    <string name="medium">Medium</string>
+    <string name="low">Low</string>
+    <string name="live_console">Live Console</string>
+    <string name="services_ports">Services & Ports</string>
+    <string name="findings">Findings</string>
+    <string name="no_ports_discovered">No active ports discovered.</string>
+    <string name="no_security_issues">🎉 No security issues detected.</string>
+    <string name="remediation_label">🛡️ Recommended Remediation:</string>
+</resources>

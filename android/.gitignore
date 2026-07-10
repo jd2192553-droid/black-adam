@@ -28,3 +28,6 @@ out/
 # Gradle wrapper
 gradlew.bat
 !gradle/wrapper/gradle-wrapper.jar
+
+# Kotlin
+*.kt.bak
