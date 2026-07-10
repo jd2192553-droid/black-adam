@@ -1,0 +1,106 @@
+#!/usr/bin/env sh
+
+#
+# Copyright 2015 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+##############################################################################
+##
+##  Gradle start up script for UN*X
+##
+##############################################################################
+
+# Attempt to set APP_HOME
+# Resolve links: $0 may be a link
+PRG="$0"
+# Need this for relative symlinks.
+while [ -h "$PRG" ] ; do
+    ls -ld "$PRG"
+    PRG=$(readlink "$PRG")
+done
+SAVED="$(cd -P "$(dirname "$PRG")" >/dev/null 2>&1 && pwd)"
+APP_HOME="$(dirname "$SAVED")"
+
+# Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+DEFAULT_JVM_OPTS='\-Xmx64m \-Xms64m'
+
+# Use the maximum available, or set a specific amount, if desired at the end.
+# DEFAULT_JVM_OPTS="-Xmx64m -Xms64m"
+
+JAVA_EXE="$JAVA_HOME/bin/java"
+if [ ! -x "$JAVA_EXE" ] ; then
+    JAVA_EXE="java"
+fi
+
+if [ ! -x "$JAVA_EXE" ]
+then
+    echo "Error: JAVA_HOME is not defined correctly." >&2
+    echo "We cannot execute $JAVA_EXE" >&2
+    exit 1
+fi
+
+if [ -z "$JAVA_HOME" ] ; then
+    echo "Warning: JAVA_HOME environment variable is not set."
+fi
+
+JAR="$SAVED/gradle/wrapper/gradle-wrapper.jar"
+MANIFEST="$JAR.manifest"
+
+echo "Downloading gradle-7.6.1..."
+if ! [ -f "$JAR" ]; then
+    if command -v wget > /dev/null; then
+        wget "https://services.gradle.org/distributions/gradle-7.6.1-bin.zip" -O /tmp/gradle.zip
+    elif command -v curl > /dev/null; then
+        curl -L "https://services.gradle.org/distributions/gradle-7.6.1-bin.zip" -o /tmp/gradle.zip
+    fi
+    mkdir -p "$SAVED/gradle/wrapper"
+    unzip -q /tmp/gradle.zip -d /tmp/
+    cp /tmp/gradle-7.6.1/lib/gradle-wrapper.jar "$JAR"
+fi
+
+# Collect all arguments for the java command, stacking in reverse order
+args=()
+for arg in "$@" ; do
+    args=("$arg" "${args[@]}")
+done
+
+# by default we should be in the correct project dir, but when run from Finder on Mac, the cwd is wrong
+if [ "$(uname)" = "Darwin" ] && [ "$HOME" = "$PWD" ]; then
+    cd "$(dirname "$0")" || exit 1
+fi
+
+# Determine the Java command to use in order to perform the sync or
+# determine the -XshowSettings:properties output.
+JAVA_CMD="$JAVA_EXE"
+if [ -n "$JAVA_HOME" ] ; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+        # IBM's JDK on AIX uses strange locations for the executables
+        JAVA_CMD="$JAVA_HOME/jre/sh/java"
+    elif [ -x "$JAVA_HOME/bin/java" ] ; then
+        JAVA_CMD="$JAVA_HOME/bin/java"
+    fi
+fi
+
+if [ ! -x "$JAVA_CMD" ] ; then
+    echo "Error: JAVA_HOME is not defined correctly." >&2
+    echo "We cannot execute $JAVA_CMD" >&2
+    exit 1
+fi
+
+if [ -z "$JAVA_HOME" ] ; then
+    echo "Warning: JAVA_HOME environment variable is not set."
+fi
+
+exec "$JAVA_CMD" "${JVM_OPTS[@]}" -jar "$JAR" "${args[@]}"
